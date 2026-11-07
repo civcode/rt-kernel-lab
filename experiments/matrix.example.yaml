@@ -1,0 +1,5 @@
+base_experiment: experiments/pi3-matrix-base.example.yaml
+factors:
+  timer-hz:
+    hz250: configs/scheduler/hz250.cfg
+    hz1000: configs/scheduler/hz1000.cfg

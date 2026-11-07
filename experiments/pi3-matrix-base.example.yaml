@@ -1,0 +1,14 @@
+name: pi3-rt
+target: pi3-os
+source_dir: /srv/kernel/linux
+source_commit: '0000000000000000000000000000000000000000'
+defconfig: bcm2711_defconfig
+fragments:
+  - configs/common/preempt-rt.cfg
+benchmark:
+  duration_seconds: 60
+  repetitions: 3
+  priority: 80
+  interval_us: 1000
+  load: idle
+  stress_workers: 2

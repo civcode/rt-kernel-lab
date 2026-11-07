@@ -1,0 +1,269 @@
+{
+  "$defs": {
+    "BenchmarkSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "duration_seconds": {
+          "default": 60,
+          "maximum": 86400,
+          "minimum": 5,
+          "title": "Duration Seconds",
+          "type": "integer"
+        },
+        "repetitions": {
+          "default": 3,
+          "maximum": 100,
+          "minimum": 1,
+          "title": "Repetitions",
+          "type": "integer"
+        },
+        "priority": {
+          "default": 80,
+          "maximum": 95,
+          "minimum": 1,
+          "title": "Priority",
+          "type": "integer"
+        },
+        "interval_us": {
+          "default": 1000,
+          "maximum": 1000000,
+          "minimum": 50,
+          "title": "Interval Us",
+          "type": "integer"
+        },
+        "load": {
+          "default": "idle",
+          "enum": [
+            "idle",
+            "cpu-stress"
+          ],
+          "title": "Load",
+          "type": "string"
+        },
+        "stress_workers": {
+          "default": 2,
+          "maximum": 32,
+          "minimum": 1,
+          "title": "Stress Workers",
+          "type": "integer"
+        }
+      },
+      "title": "BenchmarkSpec",
+      "type": "object"
+    },
+    "LatencyMeasurement": {
+      "additionalProperties": false,
+      "properties": {
+        "repetition": {
+          "minimum": 1,
+          "title": "Repetition",
+          "type": "integer"
+        },
+        "min_us": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Min Us"
+        },
+        "avg_us": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Avg Us"
+        },
+        "max_us": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Us"
+        },
+        "p99_us": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "P99 Us"
+        },
+        "p999_us": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "P999 Us"
+        },
+        "sample_count": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sample Count"
+        }
+      },
+      "required": [
+        "repetition"
+      ],
+      "title": "LatencyMeasurement",
+      "type": "object"
+    },
+    "RawBenchmarkOutput": {
+      "additionalProperties": false,
+      "properties": {
+        "repetition": {
+          "minimum": 1,
+          "title": "Repetition",
+          "type": "integer"
+        },
+        "command": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Command",
+          "type": "array"
+        },
+        "returncode": {
+          "title": "Returncode",
+          "type": "integer"
+        },
+        "stdout": {
+          "title": "Stdout",
+          "type": "string"
+        },
+        "stderr": {
+          "title": "Stderr",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repetition",
+        "command",
+        "returncode",
+        "stdout",
+        "stderr"
+      ],
+      "title": "RawBenchmarkOutput",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "experiment_id": {
+      "title": "Experiment Id",
+      "type": "string"
+    },
+    "target": {
+      "title": "Target",
+      "type": "string"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "kernelrelease": {
+      "title": "Kernelrelease",
+      "type": "string"
+    },
+    "profile": {
+      "$ref": "#/$defs/BenchmarkSpec"
+    },
+    "successful": {
+      "title": "Successful",
+      "type": "boolean"
+    },
+    "measurements": {
+      "items": {
+        "$ref": "#/$defs/LatencyMeasurement"
+      },
+      "title": "Measurements",
+      "type": "array"
+    },
+    "environment": {
+      "additionalProperties": true,
+      "title": "Environment",
+      "type": "object"
+    },
+    "raw_outputs": {
+      "items": {
+        "$ref": "#/$defs/RawBenchmarkOutput"
+      },
+      "title": "Raw Outputs",
+      "type": "array"
+    },
+    "failure": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Failure"
+    }
+  },
+  "required": [
+    "experiment_id",
+    "target",
+    "started_at",
+    "completed_at",
+    "kernelrelease",
+    "profile",
+    "successful",
+    "measurements",
+    "environment",
+    "raw_outputs"
+  ],
+  "title": "BenchmarkResult",
+  "type": "object"
+}

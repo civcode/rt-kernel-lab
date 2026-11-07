@@ -1,0 +1,94 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "experiment_id": {
+      "title": "Experiment Id",
+      "type": "string"
+    },
+    "experiment_name": {
+      "title": "Experiment Name",
+      "type": "string"
+    },
+    "target": {
+      "title": "Target",
+      "type": "string"
+    },
+    "source_commit": {
+      "title": "Source Commit",
+      "type": "string"
+    },
+    "defconfig": {
+      "title": "Defconfig",
+      "type": "string"
+    },
+    "kernelrelease": {
+      "title": "Kernelrelease",
+      "type": "string"
+    },
+    "localversion": {
+      "title": "Localversion",
+      "type": "string"
+    },
+    "image_sha256": {
+      "title": "Image Sha256",
+      "type": "string"
+    },
+    "modules_sha256": {
+      "title": "Modules Sha256",
+      "type": "string"
+    },
+    "config_sha256": {
+      "title": "Config Sha256",
+      "type": "string"
+    },
+    "dtbs_sha256": {
+      "title": "Dtbs Sha256",
+      "type": "string"
+    },
+    "docker_image": {
+      "title": "Docker Image",
+      "type": "string"
+    },
+    "docker_image_id": {
+      "title": "Docker Image Id",
+      "type": "string"
+    },
+    "built_at": {
+      "format": "date-time",
+      "title": "Built At",
+      "type": "string"
+    },
+    "fragment_names": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Fragment Names",
+      "type": "array"
+    }
+  },
+  "required": [
+    "experiment_id",
+    "experiment_name",
+    "target",
+    "source_commit",
+    "defconfig",
+    "kernelrelease",
+    "localversion",
+    "image_sha256",
+    "modules_sha256",
+    "config_sha256",
+    "dtbs_sha256",
+    "docker_image",
+    "docker_image_id",
+    "built_at",
+    "fragment_names"
+  ],
+  "title": "ArtifactManifest",
+  "type": "object"
+}

@@ -1,0 +1,89 @@
+{
+  "$defs": {
+    "Target": {
+      "additionalProperties": false,
+      "properties": {
+        "host": {
+          "minLength": 1,
+          "title": "Host",
+          "type": "string"
+        },
+        "user": {
+          "pattern": "^[a-z_][a-z0-9_-]*$",
+          "title": "User",
+          "type": "string"
+        },
+        "ssh_port": {
+          "default": 22,
+          "maximum": 65535,
+          "minimum": 1,
+          "title": "Ssh Port",
+          "type": "integer"
+        },
+        "board": {
+          "enum": [
+            "pi3",
+            "pi4",
+            "pi5"
+          ],
+          "title": "Board",
+          "type": "string"
+        },
+        "distro": {
+          "enum": [
+            "raspberrypi-os",
+            "ubuntu"
+          ],
+          "title": "Distro",
+          "type": "string"
+        },
+        "boot_mode": {
+          "enum": [
+            "rpi-tryboot",
+            "manual"
+          ],
+          "title": "Boot Mode",
+          "type": "string"
+        },
+        "power_cycle_argv": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Power Cycle Argv",
+          "type": "array"
+        },
+        "rescue_select_argv": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rescue Select Argv",
+          "type": "array"
+        }
+      },
+      "required": [
+        "host",
+        "user",
+        "board",
+        "distro",
+        "boot_mode"
+      ],
+      "title": "Target",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "targets": {
+      "additionalProperties": {
+        "$ref": "#/$defs/Target"
+      },
+      "title": "Targets",
+      "type": "object"
+    }
+  },
+  "required": [
+    "targets"
+  ],
+  "title": "Inventory",
+  "type": "object"
+}

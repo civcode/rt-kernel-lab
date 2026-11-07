@@ -1,0 +1,30 @@
+targets:
+  pi3-os:
+    host: 192.0.2.13   # replace TEST-NET address
+    user: lab
+    board: pi3
+    distro: raspberrypi-os
+    boot_mode: rpi-tryboot
+    ssh_port: 22
+    # Executed on the AMD64 controller. Leave empty until wired and tested.
+    power_cycle_argv: []
+    rescue_select_argv: []
+  pi4-ubuntu:
+    host: 192.0.2.14
+    user: lab
+    board: pi4
+    distro: ubuntu
+    boot_mode: manual
+    ssh_port: 22
+    power_cycle_argv: []
+    rescue_select_argv: []
+  pi5-ubuntu:
+    host: 192.0.2.15
+    user: lab
+    board: pi5
+    distro: ubuntu
+    # Ubuntu >=25.10 piboot-try flow is a separate, future adapter.
+    boot_mode: manual
+    ssh_port: 22
+    power_cycle_argv: []
+    rescue_select_argv: []

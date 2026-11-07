@@ -1,0 +1,104 @@
+{
+  "$defs": {
+    "BenchmarkSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "duration_seconds": {
+          "default": 60,
+          "maximum": 86400,
+          "minimum": 5,
+          "title": "Duration Seconds",
+          "type": "integer"
+        },
+        "repetitions": {
+          "default": 3,
+          "maximum": 100,
+          "minimum": 1,
+          "title": "Repetitions",
+          "type": "integer"
+        },
+        "priority": {
+          "default": 80,
+          "maximum": 95,
+          "minimum": 1,
+          "title": "Priority",
+          "type": "integer"
+        },
+        "interval_us": {
+          "default": 1000,
+          "maximum": 1000000,
+          "minimum": 50,
+          "title": "Interval Us",
+          "type": "integer"
+        },
+        "load": {
+          "default": "idle",
+          "enum": [
+            "idle",
+            "cpu-stress"
+          ],
+          "title": "Load",
+          "type": "string"
+        },
+        "stress_workers": {
+          "default": 2,
+          "maximum": 32,
+          "minimum": 1,
+          "title": "Stress Workers",
+          "type": "integer"
+        }
+      },
+      "title": "BenchmarkSpec",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "target": {
+      "title": "Target",
+      "type": "string"
+    },
+    "source_dir": {
+      "format": "path",
+      "title": "Source Dir",
+      "type": "string"
+    },
+    "source_commit": {
+      "title": "Source Commit",
+      "type": "string"
+    },
+    "defconfig": {
+      "enum": [
+        "bcm2711_defconfig",
+        "bcm2712_defconfig"
+      ],
+      "title": "Defconfig",
+      "type": "string"
+    },
+    "fragments": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Fragments",
+      "type": "array"
+    },
+    "benchmark": {
+      "$ref": "#/$defs/BenchmarkSpec"
+    }
+  },
+  "required": [
+    "name",
+    "target",
+    "source_dir",
+    "source_commit",
+    "defconfig",
+    "fragments"
+  ],
+  "title": "Experiment",
+  "type": "object"
+}
